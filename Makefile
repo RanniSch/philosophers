@@ -6,7 +6,7 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/30 17:21:54 by rschlott          #+#    #+#              #
-#    Updated: 2022/12/31 16:52:41 by rschlott         ###   ########.fr        #
+#    Updated: 2023/01/01 20:10:12 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ HEADER = ./incl/philo.h
 
 SRCS = 	./src/main.c \
 		./src/errors.c \
-		./src/input_check.c
+		./src/input_check.c \
+		./src/process.c
 
 # takes all source files converts them into .o and puts them into /obj
 OBJS = ${SRCS:.c=.o}
