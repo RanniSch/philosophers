@@ -6,7 +6,7 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/30 17:21:54 by rschlott          #+#    #+#              #
-#    Updated: 2023/01/01 20:10:12 by rschlott         ###   ########.fr        #
+#    Updated: 2023/01/02 09:53:04 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 # -g is for debugging info when using valgrind
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g #-g -O3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror #-g -O3 -fsanitize=thread
 
 RM			:= rm -f
 

@@ -6,12 +6,22 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:30:42 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/01 20:00:06 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:41:31 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
 
+static void stop_simulation(t_table *table)
+{
+    destroy_mutexes(table);
+    free_table(table);
+}
+
+/* First check if input is valid;
+then the process gets initialized before simulation starts;
+after simulation gets stopped; 
+EXIT_SUCCESS is defined as 0 and EXIT_FAILURE as 8 */
 int main(int argc, char **argv)
 {
     t_table *table;
@@ -25,5 +35,8 @@ int main(int argc, char **argv)
     table = init_process(argc, argv);
     if (!table)
         return (EXIT_FAILURE);
-    return (0);
+    //if (!start_simulation(table))
+    //    return (EXIT_FAILURE);
+    stop_simulation(table);
+    return (EXIT_SUCCESS);
 }
