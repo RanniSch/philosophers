@@ -6,7 +6,7 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/30 17:21:54 by rschlott          #+#    #+#              #
-#    Updated: 2023/01/02 09:53:04 by rschlott         ###   ########.fr        #
+#    Updated: 2023/01/03 16:47:31 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,11 @@ HEADER = ./incl/philo.h
 SRCS = 	./src/main.c \
 		./src/errors.c \
 		./src/input_check.c \
-		./src/process.c
+		./src/process.c \
+		./src/time.c \
+		./src/philosopher.c \
+		./src/text_output.c \
+		./src/multiple_killer.c
 
 # takes all source files converts them into .o and puts them into /obj
 OBJS = ${SRCS:.c=.o}

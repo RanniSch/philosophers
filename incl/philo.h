@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:32:48 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/02 12:35:41 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/03 16:49:43 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ between 0 and 2147483647\n"
 First digit needs to be between 1 and %s philosophers\n"
 # define STR_ERR_MALLOC "%s error: Memory allocation failed\n"
 # define STR_ERR_MUTEX "%s error: Mutex not created\n"
+# define STR_ERR_THREAD "%s error: Thread not created"
 
 /* Structs */
 typedef struct s_philo	t_philo;
@@ -46,8 +47,8 @@ pthread_t is thread variable stores info about the thread;
 pthread_mutex_t is data type of pthread_mutex_init function (is pointer) */
 typedef struct s_table
 {
-	//time_t				start_time;
 	unsigned int		nb_philos;
+	time_t				start_time;
 	time_t				time_to_die;
 	time_t				time_to_eat;
 	time_t				time_to_sleep;
@@ -65,16 +66,38 @@ id = identification;
 pthread_mutex_t is data type of pthread_mutex_init function and a pointer */
 typedef struct s_philo
 {
+	pthread_t			thread;
 	t_table				*table;
 	pthread_mutex_t		eat_time_lock;
 	unsigned int		id;
 	unsigned int		fork[2];
 	unsigned int		times_ate;
+	time_t				last_meal;
 }						t_philo;
+
+typedef enum e_status
+{
+	DIED = 0,
+	EATING = 1,
+	SLEEPING = 2,
+	THINKING = 3,
+	GOT_FORK_1 = 4,
+	GOT_FORK_2 = 5
+}						t_status;
 
 /* static functions are not declared in the headerfile because
 a static function is only visible in the file where its declared in
 and thus can only be used there */
+void					write_status(t_philo *philo_struct, bool report,
+							t_status status);
+
+time_t					time_in_ms(void);
+void					sim_start_delay(time_t start_time);
+
+bool					has_simulation_stopped(t_table *table);
+void					*philosopher(void *data);
+void					multiple_killer(void *data);
+
 void					destroy_mutexes(t_table *table);
 void					*free_table(t_table *table);
 int						input_error_msg(char *str, char *infos, int exit_no);
