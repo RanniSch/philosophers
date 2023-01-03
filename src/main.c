@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:30:42 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/03 10:54:27 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:13:25 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static bool start_simulation(t_table *table)
     unsigned int    i;
 
     i = 0;
-    table->start_time = time_in_ms() + (table->nb_philos * 8);
+    table->start_time = time_in_ms() + (table->nb_philos * 8); // better * 10?
     while (i < table->nb_philos)
     {
         if (pthread_create(&table->philos[i]->thread, NULL, &philosopher, table->philos[i]) != 0)

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 09:48:19 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/03 16:38:16 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:18:00 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,21 @@ void    sim_start_delay(time_t start_time)
 {
     while (time_in_ms() < start_time)
         continue ;
+}
+
+/* keeps a philo sleeping until wake_up_time is reached;
+during sleeping process it is checked if the simulation has ended */
+void	philo_sleep(t_table *table, time_t sleep_time)
+{
+	time_t	wake_up;
+
+	wake_up = time_in_ms() + sleep_time;
+	while (time_in_ms() < wake_up)
+	{
+		if (has_simulation_stopped(table))
+		{
+			break ;
+		}
+		usleep(100);
+	}
 }

@@ -6,11 +6,11 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:56:25 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/03 16:43:51 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:16:28 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../incl/philo.h"
 
 /* routine for if only 1 philosopher exists;
 philo can only pick up 1 fork thus cant eat and will die eventually */
@@ -22,6 +22,50 @@ static void	*lone_philo_routine(t_philo *philo_struct)
 	write_status(philo_struct, false, DIED);
 	pthread_mutex_unlock(&philo_struct->table->fork_locks[philo_struct->fork[0]]);
 	return (NULL);
+}
+
+/* calculates time_to_think to determine when the philo needs to eat again */
+static void think_routine(t_philo *philo_struct, bool tf)
+{
+    time_t  time_to_think;
+
+    pthread_mutex_lock(&philo_struct->eat_time_lock);
+    time_to_think = (philo_struct->table->time_to_die - (time_in_ms() - philo_struct->last_meal) - philo_struct->table->time_to_eat) / 2;
+    pthread_mutex_unlock(&philo_struct->eat_time_lock);
+    if (time_to_think < 0)
+        time_to_think = 0;
+    if (time_to_think == 0 && tf == true)
+        time_to_think = 1;
+    if (time_to_think > 600)
+        time_to_think = 200;
+    if (tf == false)
+        write_status(philo_struct, false, THINKING);
+    philo_sleep(philo_struct->table, time_to_think);
+}
+
+/* eating routine in which time of last meal is
+recorded at the beginning of the meal */
+static void	eat_sleep_routine(t_philo *philo_struct)
+{
+	pthread_mutex_lock(&philo_struct->table->fork_locks[philo_struct->fork[0]]);
+	write_status(philo_struct, false, GOT_FORK_1);
+	pthread_mutex_lock(&philo_struct->table->fork_locks[philo_struct->fork[1]]);
+	write_status(philo_struct, false, GOT_FORK_2);
+	write_status(philo_struct, false, EATING);
+	pthread_mutex_lock(&philo_struct->eat_time_lock);
+	philo_struct->last_meal = time_in_ms();
+	pthread_mutex_unlock(&philo_struct->eat_time_lock);
+	philo_sleep(philo_struct->table, philo_struct->table->time_to_eat);
+	if (has_simulation_stopped(philo_struct->table) == false)
+	{
+		pthread_mutex_lock(&philo_struct->eat_time_lock);
+		philo_struct->times_ate++;
+		pthread_mutex_unlock(&philo_struct->eat_time_lock);
+	}
+	write_status(philo_struct, false, SLEEPING);
+	pthread_mutex_unlock(&philo_struct->table->fork_locks[philo_struct->fork[1]]);
+	pthread_mutex_unlock(&philo_struct->table->fork_locks[philo_struct->fork[0]]);
+	philo_sleep(philo_struct->table, philo_struct->table->time_to_sleep);
 }
 
 /* function for the philo-threads called via pthread_create in start_simulation;
@@ -36,9 +80,9 @@ void    *philosopher(void *data)
     philo_struct = (t_philo *)data;
     if (philo_struct->table->must_eat_count == 0)
         return (NULL);
-    pthread_mutex_lock(&philo_struct->meal_time_lock);
+    pthread_mutex_lock(&philo_struct->eat_time_lock);
     philo_struct->last_meal = philo_struct->table->start_time;
-    pthread_mutex_unlock(&philo_struct->meal_time_lock);
+    pthread_mutex_unlock(&philo_struct->eat_time_lock);
     sim_start_delay(philo_struct->table->start_time);
     if (philo_struct->table->time_to_die == 0)
         return (NULL);
