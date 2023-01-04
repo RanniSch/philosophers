@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:38:31 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/03 22:21:44 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:13:08 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 /* checks if the simulation is at the end by checking the
 sim_stop_flag in table, which can be modiefied only by grimreaper */
-bool    has_simulation_stopped(t_table *table)
+bool	has_simulation_stopped(t_table *table)
 {
-    bool    tf;
+	bool	tf;
 
-    tf = false;
-    pthread_mutex_lock(&table->sim_stop_lock);
-    if (table->sim_stop == true)
-        tf = true;
-    pthread_mutex_unlock(&table->sim_stop_lock);
-    return (tf);
+	tf = false;
+	pthread_mutex_lock(&table->sim_stop_lock);
+	if (table->sim_stop == true)
+		tf = true;
+	pthread_mutex_unlock(&table->sim_stop_lock);
+	return (tf);
 }
 
 /* function to set the stop_flag for the simulation;
@@ -36,7 +36,7 @@ static void	set_sim_stop_flag(t_table *table, bool tf)
 }
 
 /* checks if the philo should die by comparing if the
-time since philos last meal is greater than the time_to_die;
+time since philos last meal is greater than the	time_to_die;
 in case of death the stop_sim_flag is set to true */
 static bool	kill_philo(t_philo *philo_struct)
 {
@@ -84,9 +84,9 @@ static bool	end_condition_reached(t_table *table)
 }
 
 /* is called in start_simulation (main.c) via pthread_create;
-data is table which is put in pthread_create function;
+data is table which is put in pthread_create	function;
 continously checks for validity of an end condition and sets
-the flag accordingly via end_condition_reached;
+the flag accordingly via						end_condition_reached;
 *table new declared cause it is not passed through function */
 void	*multiple_killer(void *data)
 {

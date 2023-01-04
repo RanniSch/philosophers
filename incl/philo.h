@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:32:48 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/03 22:19:41 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:21:57 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int						input_error_msg(char *str, char *infos, int exit_no);
 void					*error_null(char *str, char *infos, t_table *table);
 int						error_failure(char *str, char *details, t_table *table);
 
-/* **** input_check.c: converts string to ints and checks for valid input ******/
+/* **** input_check.c: converts string to ints and checks for valid input *****/
 int						ft_atoi(const char *str);
 bool					is_valid_input(int argc, char **argv);
 

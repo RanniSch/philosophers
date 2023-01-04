@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:41:56 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/04 21:17:29 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:04:36 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	destroy_mutexes(t_table *table)
 void	*free_table(t_table *table)
 {
 	unsigned int	i;
-	
+
 	if (!table)
 		return (NULL);
 	if (table->fork_locks != NULL)
@@ -45,12 +45,8 @@ void	*free_table(t_table *table)
 		{
 			if (table->philos[i] != NULL)
 				free(table->philos[i]);
-			//if (table->fork_locks != NULL)
-			//	free(table->fork_locks);
 			i++;
-			//table->fork_locks++;
 		}
-		//free(table->fork_locks);
 		free(table->philos);
 	}
 	free(table);
@@ -70,8 +66,8 @@ int	input_error_msg(char *str, char *infos, int exit_no)
 }
 
 /* error function for any errors during initialization of table struct
-or any of its included variables;
-frees memory via free_table() */
+or any of its included	variables;
+frees memory via	free_table(void) */
 void	*error_null(char *str, char *infos, t_table *table)
 {
 	if (table != NULL)

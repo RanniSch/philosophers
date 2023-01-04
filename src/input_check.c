@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:36:12 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/01 19:59:58 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/04 22:07:57 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@ static: is limited to its object file; no change possible;
 static functions are not declared in the headerfile because
 a static function is only visible in the file where its declared in
 and thus can only be used there */
-static bool input_digits(char *str)
+static bool	input_digits(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i] != '\0')
-    {
-        if (str[i] < '0' || str[i] > '9')
-            return (false);
-        i++;
-    }
-    return (true);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 /* Convert a string to an integer. The behavior is the same as 
@@ -61,21 +61,25 @@ int	ft_atoi(const char *str)
 	return (convert * sign);
 }
 
-bool    is_valid_input(int argc, char **argv)
+/* checks if input is valid: only digits, num of philos 1-MAX_PHILOS,
+int between INT_MAX and 0;
+nb == -1 is returned from ft_atoi in case input is invalid */
+bool	is_valid_input(int argc, char **argv)
 {
-    int i;
-    int nb;
+	int	i;
+	int	nb;
 
-    i = 0;
-    while (++i < argc)
-    {
-        if (!input_digits(argv[i]))
-            return (input_error_msg(STR_ERR_INPUT_DIGIT, argv[i], false));
-        nb = ft_atoi(argv[i]);
-        if (i == 1 && (nb <= 0 || nb > MAX_PHILOS))
-            return (input_error_msg(STR_ERR_INPUT_PHILO, STR_MAX_PHILOS, false));
-        if (i != 1 && nb == -1)
-            return (input_error_msg(STR_ERR_INPUT_DIGIT, argv[i], false));
-    }
-    return (true);
+	i = 0;
+	while (++i < argc)
+	{
+		if (!input_digits(argv[i]))
+			return (input_error_msg(STR_ERR_INPUT_DIGIT, argv[i], false));
+		nb = ft_atoi(argv[i]);
+		if (i == 1 && (nb <= 0 || nb > MAX_PHILOS))
+			return (input_error_msg(STR_ERR_INPUT_PHILO, STR_MAX_PHILOS,
+					false));
+		if (i != 1 && nb == -1)
+			return (input_error_msg(STR_ERR_INPUT_DIGIT, argv[i], false));
+	}
+	return (true);
 }
