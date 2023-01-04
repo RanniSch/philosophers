@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:29:51 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/03 22:21:11 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:21:11 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	print_status(t_philo *philo_struct, char *str)
 must be locked by mutex to prevent mixing of messages */
 void	write_status(t_philo *philo_struct, bool tf, t_status status)
 {
+	pthread_mutex_init(&philo_struct->table->write_lock, 0); // check for if (... != 0) should be there if mutex init fails; but void function
+		//return (error_failure(STR_ERR_MUTEX, NULL, NULL));
 	pthread_mutex_lock(&philo_struct->table->write_lock);
 	if (has_simulation_stopped(philo_struct->table) == true && tf == false)
 	{

@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:36:55 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/02 12:22:18 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/04 21:12:21 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static pthread_mutex_t *init_forks(t_table *table)
     i = 0;
     while (i < table->nb_philos)
     {
-        //pthread_mutex_init(&lock_forks[i], 0);
         if (pthread_mutex_init(&lock_forks[i], 0) != 0)
             return (error_null(STR_ERR_MUTEX, NULL, 0));
         i++;
