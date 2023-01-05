@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:30:42 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/04 22:26:42 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/05 21:47:47 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	main(int argc, char **argv)
 	t_table	*table;
 
 	table = NULL;
-	(void)argv;
 	if (argc != 5 && argc != 6)
 		return (input_error_msg(STR_INPUT_FORMAT, NULL, EXIT_FAILURE));
 	if (!is_valid_input(argc, argv))

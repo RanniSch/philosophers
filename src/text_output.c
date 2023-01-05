@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 11:29:51 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/05 08:39:35 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/05 21:44:33 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	write_status(t_philo *philo_struct, bool tf, t_status status)
 	else if (status == THINKING)
 		print_status(philo_struct, "is thinking");
 	else if (status == GOT_FORK_1 || status == GOT_FORK_2)
+	{
 		print_status(philo_struct, "takes a fork");
+	}
 	pthread_mutex_unlock(&philo_struct->table->write_lock);
 }
