@@ -6,14 +6,14 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:32:48 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/04 22:21:57 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/05 09:07:26 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-//# include <limits.h>
+# include <limits.h>
 # include <pthread.h>
 # include <stdbool.h>
 # include <stddef.h>
@@ -37,7 +37,7 @@ between 0 and 2147483647\n"
 First digit needs to be between 1 and %s philosophers\n"
 # define STR_ERR_MALLOC "%s error: Memory allocation failed\n"
 # define STR_ERR_MUTEX "%s error: Mutex not created\n"
-# define STR_ERR_THREAD "%s error: Thread not created"
+# define STR_ERR_THREAD "%s error: Thread not created\n"
 
 /* Structs */
 typedef struct s_philo	t_philo;
