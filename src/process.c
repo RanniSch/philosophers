@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:36:55 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/04 22:19:02 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/05 08:25:31 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ static bool	init_global_mutexes(t_table *table)
 		return (error_failure(STR_ERR_MUTEX, NULL, table));
 	}
 	if (pthread_mutex_init(&table->do_lock, 0) != 0)
+	{
+		return (error_failure(STR_ERR_MUTEX, NULL, table));
+	}
+	if (pthread_mutex_init(&table->write_lock, 0) != 0)
 	{
 		return (error_failure(STR_ERR_MUTEX, NULL, table));
 	}
