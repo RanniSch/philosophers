@@ -6,15 +6,15 @@
 #    By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/30 17:21:54 by rschlott          #+#    #+#              #
-#    Updated: 2023/01/05 20:40:43 by rschlott         ###   ########.fr        #
+#    Updated: 2023/01/06 14:46:14 by rschlott         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ========= compilation ==============
-# -g is for debugging info when using valgrind
+# -g is for debugging info
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -O3 -fsanitize=address #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror #-g -O3 -fsanitize=address #-fsanitize=thread
 
 RM			:= rm -f
 

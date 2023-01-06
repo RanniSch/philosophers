@@ -6,7 +6,7 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 17:32:48 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/05 21:32:39 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/06 14:47:05 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ First digit needs to be between 1 and %s philosophers\n"
 
 /* Structs */
 typedef struct s_philo	t_philo;
-//typedef struct s_forks	t_forks;
 
 /* stores input values; time_t defined in gettimeofday; 
 pthread_t is thread variable stores info about the thread;
@@ -57,19 +56,12 @@ typedef struct s_table
 	pthread_t			multiple_killer;
 	bool				sim_stop;
 	pthread_mutex_t		*fork_locks;
-	//unsigned int		*forks;
 	pthread_mutex_t		sim_stop_lock;
 	pthread_mutex_t		write_lock;
 	pthread_mutex_t		do_lock;
 	t_philo				**philos;
 
 }						t_table;
-
-/*typedef struct s_forks
-{
-	int	id_fork;
-	pthread_mutex_t fork_locks;
-}	t_forks;*/
 
 /* struct for for a philosopher;
 id = identification;
@@ -79,10 +71,8 @@ typedef struct s_philo
 	pthread_t			thread;
 	t_table				*table;
 	pthread_mutex_t		eat_time_lock;
-
 	unsigned int		id;
 	unsigned int		id_fork;
-	unsigned int		fork[2];
 	unsigned int		*right_fork;
 	unsigned int		*left_fork;
 	unsigned int		times_ate;

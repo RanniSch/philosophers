@@ -6,70 +6,36 @@
 /*   By: rschlott <rschlott@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 19:36:55 by rschlott          #+#    #+#             */
-/*   Updated: 2023/01/05 21:45:59 by rschlott         ###   ########.fr       */
+/*   Updated: 2023/01/06 15:02:36 by rschlott         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/philo.h"
 
 /* assigns forks to each philosopher;
-uneven number philo (% 2 != 0) takes own fork first and then fork of neighbour;
-even number philo takes first fork of neighbour and then own	fork;
-%philo->table->nb_philos equals fork of neighbour (last philo gets from 1st)
-static void	assign_forks(t_philo *philo)
-{
-	if (philo->id % 2 != 0)
-	{
-		philo->fork[0] = philo->id;
-		philo->fork[1] = (philo->id + 1) % philo->table->nb_philos;
-	}
-	else
-	{
-		philo->fork[0] = (philo->id + 1) % philo->table->nb_philos;
-		philo->fork[1] = philo->id;
-	}
-}*/
-/* ggf. Zuordung gerade ungerade erst bei mutexes */
+own fork is "right_fork", fork from the next philo is "left_fork";
+&philo->id_fork '&' for storage space of fork, to make sure that we
+only use as much forks as philos (last philo gets from 1st); */
 static void	assign_forks(t_philo **philos, t_table *table)
 {
 	unsigned int	i;
-	t_philo *philo;
+	t_philo			*philo;
 
 	i = 0;
-	//philos->right_fork = NULL;
-	//philos->left_fork = NULL;
-	//printf("id fork %d\n", philo->id_fork);
 	while (i < table->nb_philos)
 	{
 		philo = philos[i];
-		philo->right_fork = (&philo->id_fork); //& for id (save position) of fork
-		//printf("address %p\n", philo->right_fork);
+		philo->right_fork = (&philo->id_fork);
 		if (i == table->nb_philos - 1)
-		{
 			philo->left_fork = (&philos[0]->id_fork);
-			//printf("address %p\n", philo->left_fork);
-		}
 		else
-		{
 			philo->left_fork = (&philos[i + 1]->id_fork);
-			//printf("address %p\n", philo->left_fork);
-		}
-		/*if (philo->id % 2 != 0 && i != 0)
-		{
-			philo->fork[0] = philo->id;
-			philo->fork[1] = (philo->id + 1) % philo->table->nb_philos;
-		}
-		else
-		{
-			philo->fork[0] = (philo->id + 1) % philo->table->nb_philos;
-			philo->fork[1] = philo->id;
-		}*/
 		i++;
 	}
 }
 
 /* creates/initializes the philosphers' structs and returns array
-of philosophers which is put into the table						struct;
+of philosophers which is put into the table	struct;
 With this the forks get also saved in there, as to each philo belongs a fork!
 pthread_mutex_init:initializes mutex (here eating time for each philosopher), 
 returns 0 if successful;
@@ -94,7 +60,6 @@ static t_philo	**init_philosophers(t_table *table)
 		philos[i]->id = i;
 		philos[i]->id_fork = i;
 		philos[i]->times_ate = 0;
-		//assign_forks(philos[i], table, i);
 		i++;
 	}
 	assign_forks(philos, table);
@@ -144,7 +109,7 @@ static bool	init_global_mutexes(t_table *table)
 }
 
 /* puts user input values to variables;
-then calls other												functions;
+then calls other							functions;
 sim_stop set to false as before start of simulation */
 t_table	*init_process(int argc, char **argv)
 {
