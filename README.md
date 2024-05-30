@@ -27,6 +27,7 @@ philosopher dies.<br>
 - Each philosopher has a number ranging from 1 to number_of_philosophers.<br>
 - Philosopher number 1 sits next to philosopher number number_of_philosophers.<br>
 - Any other philosopher number N sits between philosopher number N - 1 and philosopher number N + 1.<br><br>
+
 Command
 ```
 ./philo 5 800 200 200 7
