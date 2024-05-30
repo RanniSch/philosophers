@@ -26,4 +26,11 @@ number_of_philosophers<br> time_to_die<br> time_to_eat<br> time_to_sleep<br> [nu
 philosopher dies.<br>
 - Each philosopher has a number ranging from 1 to number_of_philosophers.<br>
 - Philosopher number 1 sits next to philosopher number number_of_philosophers.<br>
-- Any other philosopher number N sits between philosopher number N - 1 and philosopher number N + 1.<br>
+- Any other philosopher number N sits between philosopher number N - 1 and philosopher number N + 1.<br><br>
+Command
+```
+./philo 5 800 200 200 7
+```
+
+https://github.com/RanniSch/philosophers/assets/104382315/3d3ebca7-dae1-497b-b984-e155013f6724 
+
