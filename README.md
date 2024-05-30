@@ -1,6 +1,6 @@
 # Philosophers
 
-In this project is about the basics of threading a process. Threads and mutexes were used. <br><br>
+This project is about the basics of threading a process. Threads and mutexes were used. <br><br>
 
 ## About Philosophers
 - One or more philosophers sit at a round table.<br>
