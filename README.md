@@ -1,6 +1,6 @@
 # Philosophers
 
-In this project is about the basics of threading a process. Threads and mutexes were used. <br>
+In this project is about the basics of threading a process. Threads and mutexes were used. <br><br>
 
 ## About Philosophers
 - One or more philosophers sit at a round table.<br>
@@ -13,11 +13,11 @@ In this project is about the basics of threading a process. Threads and mutexes 
 - Every philosopher needs to eat and should never starve.<br>
 - Philosophers don’t speak with each other.<br>
 - Philosophers don’t know if another philosopher is about to die.<br>
-- No need to say that philosophers should avoid dying!<br>
+- No need to say that philosophers should avoid dying!<br><br>
 
 ## The program
 The program takes the following arguments:<br>
-number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]<br><br>
+number_of_philosophers   time_to_die   time_to_eat   time_to_sleep   [number_of_times_each_philosopher_must_eat]<br><br>
 - number_of_philosophers: The number of philosophers and also the number of forks.<br>
 - time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the simulation, they die.<br>
 - time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.<br>
