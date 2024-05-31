@@ -17,7 +17,7 @@ This project is about the basics of threading a process. Threads and mutexes wer
 
 ## The program
 The program takes the following arguments:<br>
-number_of_philosophers<br> time_to_die<br> time_to_eat<br> time_to_sleep<br> [number_of_times_each_philosopher_must_eat]<br><br>
+**number_of_philosophers**<br> **time_to_die**<br> **time_to_eat**<br> **time_to_sleep**<br> **[number_of_times_each_philosopher_must_eat]**<br><br>
 - number_of_philosophers: The number of philosophers and also the number of forks.<br>
 - time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the simulation, they die.<br>
 - time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.<br>
@@ -28,7 +28,7 @@ philosopher dies.<br>
 - Philosopher number 1 sits next to philosopher number number_of_philosophers.<br>
 - Any other philosopher number N sits between philosopher number N - 1 and philosopher number N + 1.<br><br>
 
-Command
+Run f.e. the command
 ```
 ./philo 5 800 200 200 7
 ```
